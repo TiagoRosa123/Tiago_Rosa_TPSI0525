@@ -6,37 +6,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f8ff;
+            margin: 0;
+            background: linear-gradient(to bottom right, #f0f8ff, #ffffff);
         }
-        
+
         h1 {
             color: #2c5aa0;
             text-align: center;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
-        
-        h2 {
-            color: #1e4080;
-        }
-        
+
         nav {
             background-color: #ddeeff;
             padding: 10px;
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         nav a {
             margin: 0 15px;
             text-decoration: none;
             color: #2c5aa0;
             font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
-        
+
         nav a:hover {
-            color: #ff6b35;
+            background-color: #2c5aa0;
+            color: white;
         }
-        
+
+        .imagem-topo {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-bottom: 3px solid #2c5aa0;
+        }
+
         .conteudo {
             max-width: 800px;
             margin: 0 auto;
@@ -44,73 +52,86 @@
             padding: 20px;
             border-radius: 10px;
         }
-        
+
+        .secao {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
         .destaque {
             background-color: #ffffcc;
             padding: 15px;
             border-left: 4px solid #ff6b35;
             margin: 20px 0;
         }
-        
+
         footer {
             text-align: center;
             margin-top: 30px;
             color: #666;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Descubra Lisboa</h1>
-    
+
+    <img src="../Trabalho2/img/lisbona-notte.jpg" alt="Vista de Lisboa" class="imagem-topo">
+
     <nav>
-        <a href="index.html">Início</a>
-        <a href="../Trabalho2/paginas/pagina1.html">Atrações</a>
-        <a href="../Trabalho2/paginas/pagina2.html">Gastronomia</a>
-        <a href="../Trabalho2/paginas/pagina3.html">Informações</a>
+        <a href="../Trabalho2/index.html">Início</a>
+        <a href="../Trabalho2/paginas/atracoes.html">Atrações</a>
+        <a href="../Trabalho2/paginas/gastronomia.html">Gastronomia</a>
+        <a href="../Trabalho2/paginas/informacoes.html">Informações</a>
     </nav>
-    
+
     <div class="conteudo">
-        <h2>Bem-vindos à Capital de Portugal!</h2>
-        
-        <p>Lisboa é uma cidade incrível localizada na costa oeste de Portugal. É conhecida pelas suas colinas, elétricos antigos e monumentos históricos.</p>
-        
+        <div class="secao">
+            <h2>Bem-vindos à Capital de Portugal!</h2>
+            <p>Lisboa é uma cidade incrível localizada na costa oeste de Portugal. É conhecida pelas suas colinas, elétricos antigos e monumentos históricos.</p>
+        </div>
+
         <div class="destaque">
             <strong>Sabia que:</strong> Lisboa é construída sobre sete colinas, tal como Roma!
         </div>
-        
-        <h2>O que torna Lisboa especial?</h2>
-        
-        <ul>
-            <li><strong>História:</strong> Uma cidade com mais de 2000 anos</li>
-            <li><strong>Monumentos:</strong> Torre de Belém, Mosteiro dos Jerónimos</li>
-            <li><strong>Cultura:</strong> Berço do Fado português</li>
-            <li><strong>Gastronomia:</strong> Famosa pelos pastéis de nata</li>
-            <li><strong>Clima:</strong> Sol durante quase todo o ano</li>
-        </ul>
-        
-        <h2>Planeie a sua visita</h2>
-        
-        <p>Este guia está dividido em três secções principais:</p>
-        
-        <p><strong>Atrações:</strong> Os locais que não pode perder em Lisboa</p>
-        <p><strong>Gastronomia:</strong> Os melhores sabores da cidade</p>
-        <p><strong>Informações:</strong> Dicas práticas para a sua viagem</p>
-        
+
+        <div class="secao">
+            <h2>O que torna Lisboa especial?</h2>
+            <ul>
+                <li><strong>História:</strong> Uma cidade com mais de 2000 anos</li>
+                <li><strong>Monumentos:</strong> Torre de Belém, Mosteiro dos Jerónimos</li>
+                <li><strong>Cultura:</strong> Berço do Fado português</li>
+                <li><strong>Gastronomia:</strong> Famosa pelos pastéis de nata</li>
+                <li><strong>Clima:</strong> Sol durante quase todo o ano</li>
+            </ul>
+        </div>
+
+        <div class="secao">
+            <h2>Planeie a sua visita</h2>
+            <p>Este guia está dividido em três secções principais:</p>
+            <p><strong>Atrações:</strong> Os locais que não pode perder em Lisboa</p>
+            <p><strong>Gastronomia:</strong> Os melhores sabores da cidade</p>
+            <p><strong>Informações:</strong> Dicas práticas para a sua viagem</p>
+        </div>
+
         <div class="destaque">
             <p>Dica: Comece pela secção de atrações para planear o seu roteiro!</p>
         </div>
-        
-        <h2>Lisboa em números</h2>
-        
-        <ul>
-            <li>População: cerca de 500.000 habitantes</li>
-            <li>Área: 100 km²</li>
-            <li>Colinas: 7 principais</li>
-            <li>Linhas de elétrico: 5 em funcionamento</li>
-            <li>Museus: mais de 50</li>
-        </ul>
+
+        <div class="secao">
+            <h2>Lisboa em números</h2>
+            <ul>
+                <li>População: cerca de 500.000 habitantes</li>
+                <li>Área: 100 km²</li>
+                <li>Colinas: 7 principais</li>
+                <li>Linhas de elétrico: 5 em funcionamento</li>
+                <li>Museus: mais de 50</li>
+            </ul>
+        </div>
     </div>
-    
+
     <footer>
         <p>Guia de Viagem Lisboa - 2024</p>
     </footer>
