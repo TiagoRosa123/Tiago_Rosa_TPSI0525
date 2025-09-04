@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atrações - Lisboa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #ff6b35;
+            --light-blue: #f0f8ff;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), #1e4080);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .navbar {
+            background-color: #ddeeff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+            border-radius: 5px;
+        }
+
+        .attraction-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .attraction-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .price-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffffcc, #fff3cd);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .neighborhood-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .viewpoint-list {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tram-section {
+            background: linear-gradient(135deg, #fff8dc, #f5deb3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .icon-box {
+            background-color: rgba(44, 90, 160, 0.1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-map-marked-alt me-2"></i>Guia Lisboa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-landmark me-1"></i>Atrações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gastronomia.html"><i class="fas fa-utensils me-1"></i>Gastronomia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informacoes.html"><i class="fas fa-info-circle me-1"></i>Informações</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-4 mb-3"><i class="fas fa-landmark me-3"></i>Atrações de Lisboa</h1>
+                <p class="lead">Os Locais Imperdíveis da Cidade</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrossel Atrações -->
+    <div class="container my-5">
+        <div id="carouselAtracoes" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner rounded shadow">
+                <div class="carousel-item active">
+                    <img src="img/TorreBelem.jpg" class="d-block w-100 hero-image" alt="Torre de Belém">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Torre de Belém</h5>
+                        <p>Património Mundial da UNESCO</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/mosteiro-dos-jeronimos.jpg" class="d-block w-100 hero-image" alt="Mosteiro dos Jerónimos">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Mosteiro dos Jerónimos</h5>
+                        <p>Obra-prima da arquitetura manuelina</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/SaintGeorge-sCastleinLisbon.jpg" class="d-block w-100 hero-image" alt="Castelo de São Jorge">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Castelo de São Jorge</h5>
+                        <p>Mais de 1000 anos de história</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/alfama-1.jpeg" class="d-block w-100 hero-image" alt="Alfama">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Alfama</h5>
+                        <p>O bairro mais antigo de Lisboa</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Controlo -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAtracoes" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselAtracoes" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselAtracoes" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselAtracoes" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselAtracoes" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#carouselAtracoes" data-bs-slide-to="3"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <p class="lead text-center mb-5">Lisboa tem monumentos e locais únicos que contam a história de Portugal. Aqui estão as principais atrações que deve visitar:</p>
+
+        <!-- Main Attractions -->
+        <div class="row">
+            <!-- Torre de Belém -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card attraction-card">
+                    <img src="img/TorreBelem.jpg" alt="Torre de Belém em Lisboa" class="attraction-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-chess-rook me-2"></i>Torre de Belém</h5>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Localização:</strong> Belém</p>
+                        <p class="mb-2"><i class="fas fa-clock text-success me-1"></i><strong>Horário:</strong> 10h às 17h30 (fechado às segundas)</p>
+                        <p class="card-text">Símbolo de Lisboa e Património Mundial da UNESCO. Esta torre foi construída no século XVI para defender a entrada do rio Tejo.</p>
+                        <div class="price-badge">6€ (adultos)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mosteiro dos Jerónimos -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card attraction-card">
+                    <img src="img/mosteiro-dos-jeronimos.jpg" alt="Mosteiro dos Jerónimos" class="attraction-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-church me-2"></i>Mosteiro dos Jerónimos</h5>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Localização:</strong> Belém</p>
+                        <p class="mb-2"><i class="fas fa-clock text-success me-1"></i><strong>Horário:</strong> 10h às 17h30 (fechado às segundas)</p>
+                        <p class="card-text">Obra-prima da arquitetura manuelina, onde está sepultado Vasco da Gama. A construção demorou 100 anos a ser concluída.</p>
+                        <div class="price-badge">10€ (adultos)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Castelo de São Jorge -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card attraction-card">
+                    <img src="img/SaintGeorge-sCastleinLisbon.jpg" alt="Vista do Castelo de São Jorge" class="attraction-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-castle me-2"></i>Castelo de São Jorge</h5>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Localização:</strong> Alfama</p>
+                        <p class="mb-2"><i class="fas fa-clock text-success me-1"></i><strong>Horário:</strong> 9h às 21h (março a outubro)</p>
+                        <p class="card-text">Castelo medieval no topo de uma colina com vistas panorâmicas sobre a cidade. Tem mais de 1000 anos de história.</p>
+                        <div class="price-badge">10€ (adultos)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Offer -->
+        <div class="highlight-box text-center">
+            <i class="fas fa-ticket-alt fa-2x text-warning mb-3"></i>
+            <h4>Oferta Especial</h4>
+            <p class="mb-0"><strong>Compre o bilhete combinado para a Torre de Belém e Mosteiro dos Jerónimos por apenas 12€!</strong></p>
+        </div>
+
+        <!-- Historic Neighborhoods -->
+        <h2 class="text-center mb-4"><i class="fas fa-building me-2"></i>Bairros Históricos</h2>
+        <div class="row">
+            <!-- Alfama -->
+            <div class="col-lg-6">
+                <div class="neighborhood-card">
+                    <img src="img/alfama-1.jpeg" alt="Ruas típicas do bairro de Alfama" class="w-100 rounded mb-3" style="height: 200px; object-fit: cover;">
+                    <h4 class="text-primary"><i class="fas fa-music me-2"></i>Alfama</h4>
+                    <p>O bairro mais antigo de Lisboa, famoso pelas casas de fado e ruas estreitas. É aqui que se sente a verdadeira alma lisboeta.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-eye text-success me-2"></i>Miradouro da Senhora do Monte</li>
+                        <li><i class="fas fa-square text-warning me-2"></i>Largo do Chafariz de Dentro</li>
+                        <li><i class="fas fa-music text-info me-2"></i>Museu do Fado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bairro Alto -->
+            <div class="col-lg-6">
+                <div class="neighborhood-card">
+                    <img src="img/bairro-alto-9304566207-scaled.jpg" alt="Bairro Alto à noite" class="w-100 rounded mb-3" style="height: 200px; object-fit: cover;">
+                    <h4 class="text-primary"><i class="fas fa-moon me-2"></i>Bairro Alto</h4>
+                    <p>Centro da vida noturna lisboeta durante a noite, e zona calma durante o dia. Perfeito para passear e descobrir lojas tradicionais.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-eye text-success me-2"></i>Miradouro de São Pedro de Alcântara</li>
+                        <li><i class="fas fa-shopping-bag text-warning me-2"></i>Rua do Norte (lojas vintage)</li>
+                        <li><i class="fas fa-angle-up text-info me-2"></i>Elevador da Glória</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Viewpoints -->
+        <h2 class="text-center mb-4"><i class="fas fa-binoculars me-2"></i>Miradouros com Vista</h2>
+        <div class="viewpoint-list">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box me-3">
+                            <i class="fas fa-mountain text-primary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Miradouro da Senhora do Monte</h6>
+                            <small class="text-muted">A vista mais alta de Lisboa</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box me-3">
+                            <i class="fas fa-users text-primary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Miradouro de Santa Catarina</h6>
+                            <small class="text-muted">Popular entre jovens</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box me-3">
+                            <i class="fas fa-door-open text-primary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Miradouro das Portas do Sol</h6>
+                            <small class="text-muted">Vista sobre Alfama</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-box me-3">
+                            <i class="fas fa-sun text-primary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Miradouro da Graça</h6>
+                            <small class="text-muted">Pôr do sol espetacular</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box text-center">
+            <i class="fas fa-camera fa-2x text-warning mb-3"></i>
+            <h4>Conselho Fotográfico</h4>
+            <p class="mb-0"><strong>Visite os miradouros ao final da tarde para apanhar o pôr do sol!</strong></p>
+        </div>
+
+        <!-- Historic Trams -->
+        <div class="tram-section">
+            <h2 class="text-center mb-4"><i class="fas fa-train me-2"></i>Elétricos Históricos</h2>
+            <p class="text-center mb-4">Os famosos elétricos amarelos são uma atração por si só:</p>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="icon-box">
+                        <i class="fas fa-route text-warning fa-2x"></i>
+                    </div>
+                    <h5>Elétrico 28</h5>
+                    <p class="small">Passa pelos principais bairros históricos</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="icon-box">
+                        <i class="fas fa-church text-warning fa-2x"></i>
+                    </div>
+                    <h5>Elétrico 15</h5>
+                    <p class="small">Liga o centro a Belém</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="icon-box">
+                        <i class="fas fa-mountain text-warning fa-2x"></i>
+                    </div>
+                    <h5>Elétrico 12</h5>
+                    <p class="small">Sobe até ao Miradouro da Senhora do Monte</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-0"><i class="fas fa-copyright me-1"></i>Guia de Viagem Lisboa - 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

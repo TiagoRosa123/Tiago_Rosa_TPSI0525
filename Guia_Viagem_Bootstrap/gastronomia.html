@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomia - Lisboa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #ff6b35;
+            --light-blue: #f0f8ff;
+            --food-orange: #ff8c42;
+            --food-red: #e74c3c;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--food-orange), var(--food-red));
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .navbar {
+            background-color: #ddeeff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+            border-radius: 5px;
+        }
+
+        .dish-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .restaurant-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--food-orange);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffffcc, #fff3cd);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .drinks-section {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .market-section {
+            background: linear-gradient(135deg, #fff8dc, #f5deb3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .sweets-section {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .feature-icon {
+            background-color: rgba(255, 140, 66, 0.1);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-map-marked-alt me-2"></i>Guia Lisboa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="atracoes.html"><i class="fas fa-landmark me-1"></i>Atrações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-utensils me-1"></i>Gastronomia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="informacoes.html"><i class="fas fa-info-circle me-1"></i>Informações</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-4 mb-3"><i class="fas fa-utensils me-3"></i>Gastronomia de Lisboa</h1>
+                <p class="lead">Sabores Tradicionais da Capital</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Carrossel Gastronomia -->
+    <div class="container my-5">
+        <div id="carouselGastronomia" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner rounded shadow">
+                <div class="carousel-item active">
+                    <img src="img/prato-com-pasteis-de-belem.jpg" class="d-block w-100 hero-image" alt="Pastéis de Nata de Lisboa">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Pastéis de Nata</h5>
+                        <p>O doce mais famoso de Lisboa</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/bacalao-o-bacalhau-a-bras.jpeg" class="d-block w-100 hero-image" alt="Bacalhau à Brás">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Bacalhau à Brás</h5>
+                        <p>Um clássico português feito com bacalhau desfiado</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/sardinhas_assadas.jpg" class="d-block w-100 hero-image" alt="Sardinhas Assadas">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Sardinha Assada</h5>
+                        <p>Especialidade dos Santos Populares em Junho</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/bifanas.jpg" class="d-block w-100 hero-image" alt="Bifana">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Bifana</h5>
+                        <p>A sandes de carne que todos adoram</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Controlo -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselGastronomia" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselGastronomia" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselGastronomia" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselGastronomia" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselGastronomia" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#carouselGastronomia" data-bs-slide-to="3"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <p class="lead text-center mb-5">A gastronomia lisboeta é rica em sabores do mar e tradições centenárias. Descubra os pratos que fazem parte da identidade da cidade.</p>
+
+        <!-- Must Try Box -->
+        <div class="highlight-box text-center">
+            <i class="fas fa-star fa-2x text-warning mb-3"></i>
+            <h4>Não saia de Lisboa sem provar:</h4>
+            <p class="mb-0"><strong>Pastéis de nata, bacalhau à Brás e sardinha assada!</strong></p>
+        </div>
+
+        <!-- Traditional Dishes -->
+        <h2 class="text-center mb-4"><i class="fas fa-drumstick-bite me-2"></i>Pratos Típicos</h2>
+        <div class="row">
+            <!-- Pastéis de Nata -->
+            <div class="col-lg-6 col-md-6">
+                <div class="card dish-card">
+                    <img src="img/prato-com-pasteis-de-belem.jpg" alt="Pastéis de Nata" class="dish-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-cookie me-2"></i>Pastéis de Nata</h5>
+                        <p class="card-text">O doce mais famoso de Portugal, feito com massa folhada e creme de ovos.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">1,20€ cada</span>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Onde provar:</strong> Pastéis de Belém (original desde 1837)</p>
+                        <p class="mb-0"><i class="fas fa-lightbulb text-warning me-1"></i><strong>Dica:</strong> Coma morno e polvilhe com canela!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bacalhau à Brás -->
+            <div class="col-lg-6 col-md-6">
+                <div class="card dish-card">
+                    <img src="img/bacalao-o-bacalhau-a-bras.jpeg" alt="Prato de Bacalhau à Brás" class="dish-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-fish me-2"></i>Bacalhau à Brás</h5>
+                        <p class="card-text">Bacalhau desfiado com batata palha, ovos e cebola. Um clássico português.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">12-15€</span>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Onde provar:</strong> Tabernas tradicionais do Bairro Alto</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sardinha Assada -->
+            <div class="col-lg-6 col-md-6">
+                <div class="card dish-card">
+                    <img src="img/sardinhas_assadas.jpg" alt="Sardinhas assadas grelhadas" class="dish-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-fish me-2"></i>Sardinha Assada</h5>
+                        <p class="card-text">Especialmente popular durante os Santos Populares em junho.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">8-10€</span>
+                            <span class="badge bg-success">Época: Junho</span>
+                        </div>
+                        <hr>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Onde provar:</strong> Festivais de rua e tasquinhas de Alfama</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bifana -->
+            <div class="col-lg-6 col-md-6">
+                <div class="card dish-card">
+                    <img src="img/bifanas.jpg" alt="Bifana portuguesa" class="dish-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fas fa-hamburger me-2"></i>Bifana</h5>
+                        <p class="card-text">Sanduíche de carne de porco marinada, perfeita para um lanche rápido.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="price-tag">2-3€</span>
+                            <span class="badge bg-info">Lanche Rápido</span>
+                        </div>
+                        <hr>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Onde provar:</strong> Qualquer café ou tasca lisboeta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restaurants -->
+        <h2 class="text-center mb-4"><i class="fas fa-store me-2"></i>Restaurantes Recomendados</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="restaurant-card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-cookie text-warning fa-2x"></i>
+                    </div>
+                    <h5 class="text-primary">Pastéis de Belém</h5>
+                    <p class="mb-2"><strong>Especialidade:</strong> Pastéis de nata originais</p>
+                    <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i>Rua de Belém 84-92</p>
+                    <p class="mb-0"><i class="fas fa-clock text-success me-1"></i>8h às 24h</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="restaurant-card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-music text-warning fa-2x"></i>
+                    </div>
+                    <h5 class="text-primary">Taberna do Real Fado</h5>
+                    <p class="mb-2"><strong>Especialidade:</strong> Comida tradicional portuguesa</p>
+                    <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i>Rua do Diário de Notícias 23</p>
+                    <p class="mb-0"><i class="fas fa-euro-sign text-success me-1"></i>25€ por pessoa</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="restaurant-card text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils text-warning fa-2x"></i>
+                    </div>
+                    <h5 class="text-primary">Carmo Restaurant</h5>
+                    <p class="mb-2"><strong>Especialidade:</strong> Cozinha portuguesa moderna</p>
+                    <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-1"></i>Largo do Carmo</p>
+                    <p class="mb-0"><i class="fas fa-euro-sign text-success me-1"></i>35€ por pessoa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traditional Drinks -->
+        <div class="drinks-section">
+            <h2 class="text-center mb-4"><i class="fas fa-wine-glass me-2"></i>Bebidas Tradicionais</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-wine-bottle text-success"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Vinho Verde</h6>
+                            <small class="text-muted">Vinho leve e refrescante, ideal para o verão</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-glass-martini-alt text-danger"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Ginjinha</h6>
+                            <small class="text-muted">Licor de ginja servido em copinhos de chocolate</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-coffee text-dark"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Café (Bica)</h6>
+                            <small class="text-muted">Expresso é a bebida do dia-a-dia dos lisboetas</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-wine-glass text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Vinho do Porto</h6>
+                            <small class="text-muted">Vinho doce e fortificado, perfeito para sobremesa</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Markets and Street Food -->
+        <div class="market-section">
+            <h2 class="text-center mb-4"><i class="fas fa-shopping-cart me-2"></i>Mercados e Comida de Rua</h2>
+            <div class="card">
+                <img src="img/Mercado-da-Ribeira-14_2.jpg" alt="Interior do Mercado da Ribeira (Time Out Market)" class="card-img-top" style="height: 300px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title text-primary"><i class="fas fa-store-alt me-2"></i>Mercado da Ribeira (Time Out Market)</h5>
+                    <p class="card-text">Espaço gastronómico com vários restaurantes num só local. Ideal para experimentar diferentes sabores.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-clock text-success me-1"></i><strong>Horário:</strong> 10h às 2h</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt text-danger me-1"></i><strong>Localização:</strong> Cais do Sodré</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box text-center">
+            <i class="fas fa-piggy-bank fa-2x text-success mb-3"></i>
+            <h4>Dica de Poupança</h4>
+            <p class="mb-0"><strong>Almoce nos mercados locais ou tasquinhas de bairro para refeições autênticas e baratas!</strong></p>
+        </div>
+
+        <!-- Traditional Sweets -->
+        <div class="sweets-section">
+            <h2 class="text-center mb-4"><i class="fas fa-birthday-cake me-2"></i>Doçaria Tradicional</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-cookie-bite text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Queijadas de Sintra</h6>
+                            <small class="text-muted">Pequenos bolos de queijo fresco</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-bread-slice text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Travesseiros</h6>
+                            <small class="text-muted">Doce folhado recheado com creme de amêndoa</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-seedling text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Bolo de Arroz</h6>
+                            <small class="text-muted">Bolinho simples e húmido</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-icon me-3">
+                            <i class="fas fa-bowl-rice text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">Arroz Doce</h6>
+                            <small class="text-muted">Sobremesa cremosa com canela</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-0"><i class="fas fa-copyright me-1"></i>Guia de Viagem Lisboa - 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

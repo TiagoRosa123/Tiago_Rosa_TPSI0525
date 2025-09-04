@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações Práticas - Lisboa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #ff6b35;
+            --light-blue: #f0f8ff;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), #1e4080);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .navbar {
+            background-color: #ddeeff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+            border-radius: 5px;
+        }
+
+        .info-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .highlight-box {
+            background: #ffffcc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .danger-box {
+            background: #ffe6e6;
+            border-left: 4px solid red;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-map-marked-alt me-2"></i>Guia Lisboa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="atracoes.html"><i class="fas fa-landmark me-1"></i>Atrações</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gastronomia.html"><i class="fas fa-utensils me-1"></i>Gastronomia</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-info-circle me-1"></i>Informações</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 mb-3"><i class="fas fa-info-circle me-3"></i>Informações Práticas</h1>
+            <p class="lead">Tudo o que precisa de saber para planear a sua viagem</p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <div class="container my-5">
+
+        <!-- Info Geral -->
+        <div class="info-card">
+            <h3><i class="fas fa-globe text-primary me-2"></i>Informações Gerais</h3>
+            <ul class="mb-0">
+                <li><strong>País:</strong> Portugal</li>
+                <li><strong>Idioma:</strong> Português</li>
+                <li><strong>Moeda:</strong> Euro (€)</li>
+                <li><strong>Fuso horário:</strong> GMT+0 (GMT+1 no verão)</li>
+                <li><strong>Código telefónico:</strong> +351</li>
+                <li><strong>Emergências:</strong> 112</li>
+            </ul>
+        </div>
+
+        <!-- Aeroporto -->
+        <div class="info-card">
+            <h3><i class="fas fa-plane text-success me-2"></i>Aeroporto Humberto Delgado</h3>
+            <img src="img/aeroporto.jpg" class="w-100 rounded mb-3" alt="Aeroporto Humberto Delgado">
+            <p><strong>Localização:</strong> 7 km do centro da cidade</p>
+            <p><strong>Transporte para o centro:</strong></p>
+            <ul>
+                <li><strong>Metro:</strong> Linha Vermelha até ao centro (1,50€)</li>
+                <li><strong>Autocarros:</strong> AeroCarros 1 e 2 (2€)</li>
+                <li><strong>Taxi:</strong> 10-15€ (20-30 minutos)</li>
+                <li><strong>Uber:</strong> 8-12€</li>
+            </ul>
+        </div>
+
+        <!-- Comboio -->
+        <div class="info-card">
+            <h3><i class="fas fa-train text-warning me-2"></i>Comboio</h3>
+            <p><strong>Estações principais:</strong></p>
+            <ul>
+                <li>Gare do Oriente (internacional)</li>
+                <li>Santa Apolónia (central)</li>
+                <li>Cais do Sodré (ligações regionais)</li>
+            </ul>
+        </div>
+
+        <!-- Transportes -->
+        <div class="info-card">
+            <h3><i class="fas fa-bus text-info me-2"></i>Transportes na Cidade</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Transporte</th>
+                            <th>Preço</th>
+                            <th>Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Metro (1 viagem)</td>
+                            <td>1,50€</td>
+                            <td>4 linhas principais</td>
+                        </tr>
+                        <tr>
+                            <td>Autocarros (1 viagem)</td>
+                            <td>1,85€</td>
+                            <td>Rede extensa</td>
+                        </tr>
+                        <tr>
+                            <td>Elétrico (1 viagem)</td>
+                            <td>2,85€</td>
+                            <td>Turístico mas lento</td>
+                        </tr>
+                        <tr>
+                            <td>Cartão 24h</td>
+                            <td>6,40€</td>
+                            <td>Inclui todos os transportes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="highlight-box">
+                <strong>Dica:</strong> Compre o cartão Navegante para economizar nos transportes públicos!
+            </div>
+        </div>
+
+        <!-- Quando Visitar -->
+        <div class="info-card">
+            <h3><i class="fas fa-calendar-alt text-danger me-2"></i>Quando Visitar</h3>
+            <p><strong>Primavera:</strong> Clima ameno, menos turistas</p>
+            <p><strong>Verão:</strong> Quente, muitos festivais, mais movimento</p>
+            <p><strong>Outono:</strong> Temperatura agradável, boa para caminhar</p>
+            <p><strong>Inverno:</strong> Mais frio e chuvoso, menos turistas</p>
+        </div>
+
+        <!-- Alojamento -->
+        <div class="info-card">
+            <h3><i class="fas fa-hotel text-primary me-2"></i>Alojamento</h3>
+            <img src="img/lisboa-chiado.jpg" class="w-100 rounded mb-3" alt="Zona do Chiado em Lisboa">
+            <ul>
+                <li><strong>Baixa:</strong> Centro histórico, perto de tudo</li>
+                <li><strong>Chiado:</strong> Zona elegante com boas lojas</li>
+                <li><strong>Príncipe Real:</strong> Bairro moderno</li>
+                <li><strong>Alfama:</strong> Autêntico mas barulhento</li>
+            </ul>
+            <p><strong>Preços médios por noite:</strong></p>
+            <ul>
+                <li>Hostel: 15-25€</li>
+                <li>Hotel 2-3*: 50-80€</li>
+                <li>Hotel 4-5*: 100-200€</li>
+            </ul>
+        </div>
+
+        <!-- Segurança -->
+        <div class="danger-box">
+            <h3><i class="fas fa-exclamation-triangle me-2"></i>Segurança</h3>
+            <ul class="mb-0">
+                <li>Lisboa é uma cidade segura</li>
+                <li>Cuidado com carteiristas em transportes</li>
+                <li>Evite ostentar valores</li>
+                <li>Cuidado em zonas pouco iluminadas à noite</li>
+            </ul>
+        </div>
+
+        <!-- Gorjetas -->
+        <div class="highlight-box">
+            <h3><i class="fas fa-coins me-2"></i>Gorjetas</h3>
+            <p>Não são obrigatórias, mas 5-10% em restaurantes é apreciado.</p>
+        </div>
+
+        <!-- Contactos -->
+        <div class="info-card">
+            <h3><i class="fas fa-phone-alt text-success me-2"></i>Contactos Úteis</h3>
+            <ul>
+                <li><strong>Polícia / Bombeiros / INEM:</strong> 112</li>
+                <li><strong>Turismo de Lisboa:</strong> +351 210 312 700</li>
+                <li><strong>Objetos perdidos:</strong> +351 218 816 120</li>
+            </ul>
+        </div>
+
+        <!-- Orçamento -->
+        <div class="info-card">
+            <h3><i class="fas fa-wallet text-warning me-2"></i>Orçamento Diário</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tipo de Viajante</th>
+                            <th>Orçamento/Dia</th>
+                            <th>Inclui</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mochileiro</td>
+                            <td>25-35€</td>
+                            <td>Hostel, comida barata, transportes</td>
+                        </tr>
+                        <tr>
+                            <td>Médio</td>
+                            <td>50-80€</td>
+                            <td>Hotel 3*, restaurantes, atrações</td>
+                        </tr>
+                        <tr>
+                            <td>Conforto</td>
+                            <td>100-150€</td>
+                            <td>Hotel 4*, bons restaurantes, taxis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="highlight-box">
+                <strong>Dica final:</strong> Use apps como Citymapper (transportes) e Zomato (restaurantes)!
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="mb-0">Guia de Viagem Lisboa - 2025</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
