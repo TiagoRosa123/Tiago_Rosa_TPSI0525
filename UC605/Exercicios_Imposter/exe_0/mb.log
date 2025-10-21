@@ -1,0 +1,13 @@
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2025-10-21T15:41:18.844Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T15:41:24.695Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T15:41:31.443Z"}
+{"level":"info","message":"[mb:2525] POST /imposters","timestamp":"2025-10-21T15:48:17.696Z"}
+{"level":"info","message":"[http:4545 Meu Imposter Base] Open for business...","timestamp":"2025-10-21T15:48:17.703Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T15:48:56.358Z"}
+{"level":"info","message":"[mb:2525] GET /imposters/4545","timestamp":"2025-10-21T15:49:27.677Z"}
+{"level":"info","message":"[mb:2525] GET /imposters/4545","timestamp":"2025-10-21T15:49:58.761Z"}
+{"level":"info","message":"[http:4545 Meu Imposter Base] ::ffff:127.0.0.1:53250 => GET /qualquer/caminho","timestamp":"2025-10-21T15:50:07.188Z"}
+{"level":"info","message":"[http:4545 Meu Imposter Base] no predicate match, using default response","timestamp":"2025-10-21T15:50:07.191Z"}
+{"level":"error","message":"[mb:2525] ::1:53240 transmission error X=> {\"code\":\"ERR_HTTP_REQUEST_TIMEOUT\"}","timestamp":"2025-10-21T15:50:18.954Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T15:53:10.085Z"}
+{"level":"error","message":"[mb:2525] ::1:60414 transmission error X=> {\"code\":\"ERR_HTTP_REQUEST_TIMEOUT\"}","timestamp":"2025-10-21T15:54:19.009Z"}

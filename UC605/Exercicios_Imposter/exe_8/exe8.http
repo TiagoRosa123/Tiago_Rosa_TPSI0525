@@ -1,0 +1,65 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4554,
+  "protocol": "http",
+  "name": "Exercício 8",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/temperature",
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "not": {
+            "contains": {
+              "body": "value"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "missing_field",
+              "message": "O campo 'value' é obrigatório para registar a temperatura."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+###
+POST http://localhost:4554/api/temperature
+Content-Type: application/json
+
+{
+    "unit": "celsius",
+    "timestamp": "2025-10-21T18:00:00Z"
+}
+
+
+###
+POST http://localhost:4554/api/temperature
+Content-Type: application/json
+
+{
+    "value": 25.5,
+    "unit": "celsius"
+}

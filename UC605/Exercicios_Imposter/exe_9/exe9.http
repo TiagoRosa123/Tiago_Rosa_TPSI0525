@@ -1,0 +1,105 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4555,
+  "protocol": "http",
+  "name": "Exercício 9",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/temperature",
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "not": {
+            "contains": {
+              "body": "\"value\":"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "missing_field",
+              "message": "O campo 'value' é obrigatório para registar a temperatura."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/temperature"
+          }
+        },
+        {
+          "contains": { 
+            "body": "\"value\":"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "status": "created",
+              "message": "Medição de temperatura registada com sucesso."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+###
+POST http://localhost:4555/api/temperature
+Content-Type: application/json
+
+{
+    "value": 25.5,
+    "unit": "celsius",
+    "sensor_id": "T001"
+}
+
+
+###
+POST http://localhost:4555/api/temperature
+Content-Type: application/json
+
+{
+    "value": "too_hot",
+    "unit": "celsius",
+    "sensor_id": "T001"
+}
+
+###
+POST http://localhost:4555/api/temperature
+Content-Type: application/json
+
+{
+    "unit": "celsius",
+    "sensor_id": "T001"
+}

@@ -1,0 +1,88 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4553,
+  "protocol": "http",
+  "name": "Exercício 7",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/users"
+          }
+        },
+        {
+          "contains": {
+            "body": "\"email\":\"exists@example.com\""
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "email_exists",
+              "message": "O endereço de e-mail já se encontra registado."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/users"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": {
+              "Content-Type": "application/json",
+              "Location": "/api/users/999"
+            },
+            "body": {
+              "id": 999,
+              "status": "created",
+              "message": "Utilizador criado com sucesso."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+###
+POST http://localhost:4553/api/users
+Content-Type: application/json
+
+{
+    "name": "Utilizador Novo",
+    "email": "fresh.user@example.com",
+    "password": "secure"
+}
+
+
+###
+POST http://localhost:4553/api/users
+Content-Type: application/json
+
+{
+    "name": "Utilizador Existente",
+    "email": "exists@example.com",
+    "password": "secure"
+}

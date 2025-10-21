@@ -1,0 +1,7 @@
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2025-10-21T17:37:05.295Z"}
+{"level":"info","message":"[mb:2525] POST /imposters","timestamp":"2025-10-21T17:37:10.364Z"}
+{"level":"info","message":"[http:4556 Exercício 10 - Tarefa Duplicada] Open for business...","timestamp":"2025-10-21T17:37:10.382Z"}
+{"level":"info","message":"[http:4556 Exercício 10 - Tarefa Duplicada] ::ffff:127.0.0.1:53037 => POST /api/tasks","timestamp":"2025-10-21T17:37:15.345Z"}
+{"level":"info","message":"[http:4556 Exercício 10 - Tarefa Duplicada] no predicate match, using default response","timestamp":"2025-10-21T17:37:15.357Z"}
+{"level":"info","message":"[http:4556 Exercício 10 - Tarefa Duplicada] ::ffff:127.0.0.1:53040 => POST /api/tasks","timestamp":"2025-10-21T17:37:21.795Z"}
+{"level":"info","message":"[http:4556 Exercício 10 - Tarefa Duplicada] no predicate match, using default response","timestamp":"2025-10-21T17:37:21.797Z"}

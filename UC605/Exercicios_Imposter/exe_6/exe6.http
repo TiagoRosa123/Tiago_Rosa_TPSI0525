@@ -1,0 +1,75 @@
+### 1. Criar o Imposter para "Email Duplicado" (POST na porta 4552)
+# Objetivo: Criar a estrutura base (4552, HTTP) e o stub para POST /api/users, que simula email duplicado.
+# Predicado chave: 'contains' no corpo para {"email":"exists@example.com"}
+# Requisição: POST para a API de administração do Mountebank (porta 2525).
+
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4552,
+  "protocol": "http",
+  "name": "Exercício 6",
+  "stubs": [
+    {
+      // STUB 1: Email Duplicado (O MAIS ESPECÍFICO)
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/users"
+          }
+        },
+        {
+          // Usa 'contains' para verificar se a string JSON existe no body,
+          // ignorando outros campos ou a ordem.
+          "contains": {
+            "body": "\"email\":\"exists@example.com\""
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "email_exists",
+              "message": "O endereço de e-mail já se encontra registado."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### 2. Teste de Sucesso: Email Duplicado (Passo 4.1)
+# Objetivo: Validar: status 409; corpo com error e mensagem correta.
+# O 'contains' deve corresponder.
+
+POST http://localhost:4552/api/users
+Content-Type: application/json
+
+{
+    "name": "Utilizador Existente",
+    "email": "exists@example.com",
+    "password": "secure"
+}
+
+
+### 3. Teste de Falha (Preparação para o Exercício 7): Email Válido
+# Objetivo: Confirmar que esta requisição falha (retorna 404/501).
+# O imposter só está configurado para o email duplicado, nada mais.
+
+POST http://localhost:4552/api/users
+Content-Type: application/json
+
+{
+    "name": "Novo Utilizador",
+    "email": "new.user@example.com",
+    "password": "secure"
+}

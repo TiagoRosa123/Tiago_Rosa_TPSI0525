@@ -1,0 +1,63 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4556,
+  "protocol": "http",
+  "name": "Exercício 10 - Tarefa Duplicada",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/tasks",
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "contains": {
+            "body": "\"title\":\"duplicate\""
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "duplicate_task",
+              "message": "A tarefa com este título já existe."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### 
+POST http://localhost:4556/api/tasks
+Content-Type: application/json
+
+{
+    "title": "duplicate",
+    "description": "Esta tarefa deve falhar."
+}
+
+
+###
+POST http://localhost:4556/api/tasks
+Content-Type: application/json
+
+{
+    "title": "New task 1",
+    "description": "Esta deve ser criada."
+}

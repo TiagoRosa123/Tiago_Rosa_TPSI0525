@@ -1,0 +1,18 @@
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2025-10-21T16:28:57.740Z"}
+{"level":"info","message":"[mb:2525] POST /api/login","timestamp":"2025-10-21T16:31:45.915Z"}
+{"level":"info","message":"[mb:2525] POST /api/imposters","timestamp":"2025-10-21T16:32:06.453Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T16:32:48.404Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T16:32:50.956Z"}
+{"level":"info","message":"[mb:2525] GET /images/book.jpg","timestamp":"2025-10-21T16:32:53.080Z"}
+{"level":"info","message":"[mb:2525] POST /imposters","timestamp":"2025-10-21T16:33:18.282Z"}
+{"level":"error","message":"[mb:2525] error creating imposter: [{\"code\":\"bad data\",\"message\":\"'protocol' is a required field\"}]","timestamp":"2025-10-21T16:33:18.290Z"}
+{"level":"info","message":"[mb:2525] POST /imposters","timestamp":"2025-10-21T16:36:57.053Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] Open for business...","timestamp":"2025-10-21T16:36:57.062Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:52621 => POST /api/login","timestamp":"2025-10-21T16:37:07.114Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:64278 => POST /api/login","timestamp":"2025-10-21T16:37:33.269Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:64279 => POST /api/login","timestamp":"2025-10-21T16:37:40.782Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] no predicate match, using default response","timestamp":"2025-10-21T16:37:40.932Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:64281 => POST /api/login","timestamp":"2025-10-21T16:37:57.523Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:64282 => POST /api/login","timestamp":"2025-10-21T16:37:59.495Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] no predicate match, using default response","timestamp":"2025-10-21T16:37:59.499Z"}
+{"level":"info","message":"[http:4550 Exercício 4 - Login] ::ffff:127.0.0.1:64283 => POST /api/login","timestamp":"2025-10-21T16:38:02.486Z"}

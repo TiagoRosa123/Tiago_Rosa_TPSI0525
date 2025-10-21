@@ -1,0 +1,89 @@
+###
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4551,
+  "protocol": "http",
+  "name": "Exercício 5",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/login",
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "deepEquals": {
+            "body": {
+              "username": "admin",
+              "password": "secret"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "status": "ok",
+              "token": "validtoken"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/login"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 401,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "invalid_credentials"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+###
+POST http://localhost:4551/api/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "wrong-password"
+}
+
+
+###
+POST http://localhost:4551/api/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "secret"
+}

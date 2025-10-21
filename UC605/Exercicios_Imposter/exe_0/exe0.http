@@ -1,0 +1,12 @@
+
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4545,
+  "protocol": "http",
+  "name": "Meu Imposter"
+}
+
+
+GET http://localhost:4545/qualquer/caminho

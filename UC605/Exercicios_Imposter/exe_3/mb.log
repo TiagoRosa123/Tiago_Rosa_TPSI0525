@@ -1,0 +1,5 @@
+{"level":"info","message":"[mb:2525] mountebank v2.9.1 now taking orders - point your browser to http://localhost:2525/ for help","timestamp":"2025-10-21T16:18:02.149Z"}
+{"level":"info","message":"[mb:2525] POST /imposters","timestamp":"2025-10-21T16:18:11.528Z"}
+{"level":"info","message":"[http:4549 Exercício 3 - Pesquisa de Carros com Default] Open for business...","timestamp":"2025-10-21T16:18:11.550Z"}
+{"level":"info","message":"[http:4549 Exercício 3 - Pesquisa de Carros com Default] ::ffff:127.0.0.1:63501 => GET /api/cars","timestamp":"2025-10-21T16:18:33.539Z"}
+{"level":"info","message":"[http:4549 Exercício 3 - Pesquisa de Carros com Default] ::ffff:127.0.0.1:63502 => GET /api/cars?brand=Toyota","timestamp":"2025-10-21T16:18:40.111Z"}
