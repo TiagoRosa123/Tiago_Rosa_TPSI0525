@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Animation</title>
+    <style>
+        #btn1{          
+            background-color: red;          
+        }
+    </style>
+</head>
+<body>
+    <button id="btn1">OLA</button>
+    <script>
+        function mudarCor(event){
+           const button = document.getElementById('btn1');
+           const colors ='#'+Math.floor(Math.random()*16777215).toString(16);
+           button.style.backgroundColor = colors;
+           button.textContent = "Cor alterada";
+           console.log(colors);
+        };
+        for (let i = 0; i < 10; i++) {
+            setTimeout(mudarCor, 2000);
+        }
+        mudarCor();
+    </script>
+</body>
+</html>

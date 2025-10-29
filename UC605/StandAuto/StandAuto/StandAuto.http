@@ -1,0 +1,6 @@
+@StandAuto_HostAddress = http://localhost:5070
+
+GET {{StandAuto_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
