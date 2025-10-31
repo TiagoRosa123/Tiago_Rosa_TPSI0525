@@ -3,11 +3,12 @@ POST http://localhost:2525/imposters
 Content-Type: application/json
 
 {
-  "port": 4556,
+  "port": 4557,
   "protocol": "http",
-  "name": "Exercício 10 ",
+  "name": "Exercício 11 - Criar Tarefa",
   "stubs": [
     {
+      //Exercício 10
       "predicates": [
         {
           "equals": {
@@ -38,24 +39,53 @@ Content-Type: application/json
           }
         }
       ]
+    },
+    {
+      //Exercício 11
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/tasks"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": {
+              "Content-Type": "application/json",
+              "Location": "/api/tasks/123" 
+            },
+            "body": {
+              "id": 123,
+              "status": "created",
+              "message": "Tarefa criada com sucesso."
+            }
+          }
+        }
+      ]
     }
   ]
 }
 
 
-### 
-POST http://localhost:4556/api/tasks
+### 2. Teste
+
+POST http://localhost:4557/api/tasks
+Content-Type: application/json
+
+{
+    "title": "Completar Mountebank",
+}
+
+
+### 3. Teste de Conflito
+
+POST http://localhost:4557/api/tasks
 Content-Type: application/json
 
 {
     "title": "duplicate",
-}
-
-
-###
-POST http://localhost:4556/api/tasks
-Content-Type: application/json
-
-{
-    "title": "New task 1",
 }

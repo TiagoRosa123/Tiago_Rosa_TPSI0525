@@ -1,0 +1,78 @@
+### 1. 
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4559,
+  "protocol": "http",
+  "name": "Exercício 13 - Perfil Protegido",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/api/profile",
+            "headers": {
+              "Authorization": "Bearer validtoken"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "username": "user1",
+              "email": "user1@app.com",
+              "role": "admin",
+              "status": "active"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "GET",
+            "path": "/api/profile"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 403,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "forbidden",
+              "message": "Acesso negado. Token de autenticação inválido ou ausente."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### 2. Teste de Sucesso: Com Token Válido
+GET http://localhost:4559/api/profile
+Authorization: Bearer validtoken
+
+
+### 3. Teste de Falha 1: Token Inválido (Smoke Test)
+GET http://localhost:4559/api/profile
+Authorization: Bearer invalidtoken
+
+
+### 4. Teste de Falha 2: Sem Header Authorization
+GET http://localhost:4559/api/profile

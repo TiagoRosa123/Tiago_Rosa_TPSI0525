@@ -1,0 +1,82 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4560,
+  "protocol": "http",
+  "name": "Exercício 14 - POST Content-Type Validation",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST"
+          }
+        },
+        {
+          "not": {
+            "equals": {
+              "headers": {
+                "Content-Type": "application/json"
+              }
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 415,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "unsupported_media_type",
+              "message": "Content-Type 'application/json' é obrigatório para esta requisição."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "status": "ok",
+              "message": "POST aceite (Content-Type válido)."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### 2. Teste de Falha: POST sem Content-Type
+
+POST http://localhost:4560/api/endpoint-qualquer
+Content-Type: text/plain
+
+"Este POST deve falhar"
+
+
+### 3. Teste de Sucesso: POST com Content-Type Correto
+
+POST http://localhost:4560/api/endpoint-qualquer
+Content-Type: application/json
+
+{ "data": "valid" }

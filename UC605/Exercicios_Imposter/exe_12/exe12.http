@@ -1,0 +1,91 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4558,
+  "protocol": "http",
+  "name": "Exercício 12 - Autenticação",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/auth",
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "deepEquals": {
+            "body": {
+              "username": "user1",
+              "password": "pass1"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "token": "jwt_valid_token_for_user1",
+              "expires_in": 3600
+            }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "method": "POST",
+            "path": "/api/auth"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 401,
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "error": "unauthorized",
+              "message": "Credenciais de autenticação inválidas."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### 2. Teste de Sucesso: Credenciais Válidas
+POST http://localhost:4558/api/auth
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "password": "pass1"
+}
+
+
+### 3. Teste de Falha: Credenciais Inválidas
+
+POST http://localhost:4558/api/auth
+Content-Type: application/json
+
+{
+    "username": "wrong_user",
+    "password": "wrong_pass"
+}
