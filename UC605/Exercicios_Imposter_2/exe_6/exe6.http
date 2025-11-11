@@ -1,0 +1,136 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4567,
+  "protocol": "http",
+  "name": "API Gestão de Tarefas",
+  "stubs": [
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/tarefas" } },
+        { 
+          "matches": { "body": "\"titulo\"\\s*:\\s*\"\"" } 
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "O campo 'titulo' não pode ser vazio." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/tarefas/101" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "A tarefa 101 está pendente e não pode ser removida." }
+          }
+        }
+      ]
+    },
+
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/tarefas/101" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" },
+            "body": { "id": 101, "titulo": "Resolver Bug", "estado": "pendente" }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/tarefas/102" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" },
+            "body": { "id": 102, "titulo": "Fazer Deploy", "estado": "concluída" }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/tarefas/101" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" },
+            "body": { "id": 101, "status": "atualizado", "novo_estado": "concluída" }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/tarefas/102" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" },
+            "body": { "status": "removido", "message": "Tarefa 102 removida." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/tarefas" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 201, "headers": { "Content-Type": "application/json", "Location": "/api/tarefas/103" },
+            "body": { "id": 103, "status": "created", "message": "Tarefa criada com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/tarefas" } } ],
+      "responses": [
+        {
+          "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 101, "titulo": "Resolver Bug" }, { "id": 102, "titulo": "Fazer Deploy" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Título Vazio 
+POST http://localhost:4567/api/tarefas
+Content-Type: application/json
+
+{ "titulo": "", "descricao": "Esta deve falhar" }
+
+
+### TESTE 2: POST - Sucesso 
+POST http://localhost:4567/api/tarefas
+Content-Type: application/json
+
+{ "titulo": "Nova Tarefa", "descricao": "Descrição válida" }
+
+
+### TESTE 3: DELETE - Tarefa Pendente
+DELETE http://localhost:4567/api/tarefas/101
+
+
+### TESTE 4: DELETE - Tarefa Concluída 
+DELETE http://localhost:4567/api/tarefas/102
+
+
+### TESTE 5: PUT - Alterar Estado 
+PUT http://localhost:4567/api/tarefas/101
+Content-Type: application/json
+
+{ "estado": "concluída" }
+
+
+### TESTE 6: GET Lista 
+GET http://localhost:4567/api/tarefas

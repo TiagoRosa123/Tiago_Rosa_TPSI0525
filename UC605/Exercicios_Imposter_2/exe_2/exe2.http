@@ -1,0 +1,159 @@
+### 1.
+
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4563,
+  "protocol": "http",
+  "name": "API Gestão de Inventário",
+  "stubs": [
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/produtos" } },
+        { 
+          "matches": { "body": "\"quantidade\":\\s*-\\d+" } 
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "A quantidade inicial não pode ser negativa." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "not": { "equals": { "method": "POST" } } },
+        { "or": [
+            { "equals": { "path": "/api/produtos/999" } },
+            { "equals": { "path": "/api/produtos/999/stock" } }
+          ]
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "not_found", "message": "Produto com ID 999 não encontrado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/produtos/202" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Não pode remover um produto com stock positivo." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/produtos/201" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "id": 201, "nome": "Monitor 4K", "preco": 350.00, "quantidade": 50 }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/produtos/201/stock" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Stock atualizado (simulando soma/subtração)." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/produtos" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": { "Content-Type": "application/json", "Location": "/api/produtos/998" },
+            "body": { "id": 998, "status": "created", "message": "Produto adicionado com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/produtos/203" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Produto 203 removido (Stock zero)." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/produtos" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 201, "nome": "Monitor" }, { "id": 202, "nome": "Teclado" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Quantidade Negativa 
+POST http://localhost:4563/api/produtos
+Content-Type: application/json
+
+{ "nome": "Produto X", "preco": 10.00, "quantidade": -5 }
+
+
+### TESTE 2: POST - Sucesso 
+POST http://localhost:4563/api/produtos
+Content-Type: application/json
+
+{ "nome": "Produto Y", "preco": 50.00, "quantidade": 10 }
+
+
+### TESTE 3: GET por ID - Produto Inexistente 
+GET http://localhost:4563/api/produtos/999
+
+
+### TESTE 4: DELETE - Falha 
+DELETE http://localhost:4563/api/produtos/202
+
+
+### TESTE 5: DELETE - Sucesso 
+DELETE http://localhost:4563/api/produtos/203
+
+
+### TESTE 6: PUT Stock - Sucesso 
+PUT http://localhost:4563/api/produtos/201/stock
+Content-Type: application/json
+
+{ "ajuste": 5 }
+
+
+### TESTE 7: GET Lista Genérica 
+GET http://localhost:4563/api/produtos

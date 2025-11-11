@@ -1,0 +1,89 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4568,
+  "protocol": "http",
+  "name": "API Clientes e Pedidos",
+  "stubs": [
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/pedidos" } },
+        { "matches": { "body": "\"cliente_id\"\\s*:\\s*999" } }
+      ],
+      "responses": [ { "is": { "statusCode": 404, "headers": { "Content-Type": "application/json" }, "body": { "error": "not_found", "message": "Cliente 999 não encontrado." } } } ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/pedidos" } },
+        { "matches": { "body": "\"quantidade\"\\s*:\\s*0" } }
+      ],
+      "responses": [ { "is": { "statusCode": 400, "headers": { "Content-Type": "application/json" }, "body": { "error": "validation_error", "message": "A quantidade deve ser superior a zero." } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/pedidos/701" } } ],
+      "responses": [ { "is": { "statusCode": 409, "headers": { "Content-Type": "application/json" }, "body": { "error": "conflict", "message": "Pedido 701 não pode ser cancelado (estado: Enviado)." } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/clientes/10/pedidos" } } ],
+      "responses": [ { "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" }, "body": [ { "id": 701, "produto": "Laptop", "estado": "Enviado" }, { "id": 702, "produto": "Rato", "estado": "Em processamento" } ] } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/pedidos/701" } } ],
+      "responses": [ { "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" }, "body": { "id": 701, "status": "atualizado", "novo_estado": "Entregue" } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/pedidos/702" } } ],
+      "responses": [ { "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" }, "body": { "status": "removido", "message": "Pedido 702 cancelado com sucesso." } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/pedidos" } } ],
+      "responses": [ { "is": { "statusCode": 201, "headers": { "Content-Type": "application/json", "Location": "/api/pedidos/703" }, "body": { "id": 703, "status": "created", "message": "Pedido criado com sucesso." } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/clientes" } } ],
+      "responses": [ { "is": { "statusCode": 201, "headers": { "Content-Type": "application/json", "Location": "/api/clientes/12" }, "body": { "id": 12, "status": "created" } } } ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/clientes" } } ],
+      "responses": [ { "is": { "statusCode": 200, "headers": { "Content-Type": "application/json" }, "body": [ { "id": 10, "nome": "Empresa A" }, { "id": 11, "nome": "Empresa B" } ] } } ]
+    }
+  ]
+}
+
+### TESTE 1: POST Pedido - Cliente Inexistente 
+POST http://localhost:4568/api/pedidos
+Content-Type: application/json
+
+{ "cliente_id": 999, "produto": "Produto X", "quantidade": 5 }
+
+
+### TESTE 2: POST Pedido - Quantidade Inválida 
+POST http://localhost:4568/api/pedidos
+Content-Type: application/json
+
+{ "cliente_id": 10, "produto": "Produto Y", "quantidade": 0 }
+
+
+### TESTE 3: POST Pedido - Sucesso 
+POST http://localhost:4568/api/pedidos
+Content-Type: application/json
+
+{ "cliente_id": 10, "produto": "Produto Z", "quantidade": 1 }
+
+
+### TESTE 4: DELETE - Pedido Não Permitido 
+DELETE http://localhost:4568/api/pedidos/701
+
+
+### TESTE 5: DELETE - Pedido Permitido 
+DELETE http://localhost:4568/api/pedidos/702
+
+
+### TESTE 6: GET Pedidos do Cliente 
+GET http://localhost:4568/api/clientes/10/pedidos
+
+
+### TESTE 7: GET Lista Clientes 
+GET http://localhost:4568/api/clientes

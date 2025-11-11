@@ -1,0 +1,170 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4564,
+  "protocol": "http",
+  "name": "API Controlo de Reservas",
+  "stubs": [
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/reservas" } },
+        { 
+          "matches": { 
+            "body": "(?=.*\"checkin\"\\s*:\\s*\"2025-12-30\")(?=.*\"checkout\"\\s*:\\s*\"2025-12-28\")" 
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "A data de check-out deve ser posterior à data de check-in." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/reservas" } },
+        { "matches": { "body": "\"tipo_quarto\"\\s*:\\s*\"duplo_cheio\"" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Sem disponibilidade para o tipo de quarto selecionado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "PUT", "path": "/api/reservas/302" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "A alteração só é permitida até 24h antes do check-in." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/reservas/303" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Cancelamento não permitido após o check-in." }
+          }
+        }
+      ]
+    },
+    
+
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/reservas" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": { "Content-Type": "application/json", "Location": "/api/reservas/301" },
+            "body": { "id": 301, "status": "created", "message": "Reserva criada com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/reservas/301" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Reserva 301 alterada com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/reservas/304" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Reserva 304 cancelada com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/reservas" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 301, "cliente": "Maria" }, { "id": 302, "cliente": "Pedro" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Check-out Anterior ao Check-in 
+POST http://localhost:4564/api/reservas
+Content-Type: application/json
+
+{ "cliente": "Falha Data", "checkin": "2025-12-30", "checkout": "2025-12-28", "tipo_quarto": "simples" }
+
+
+### TESTE 2: POST - Quarto Cheio 
+POST http://localhost:4564/api/reservas
+Content-Type: application/json
+
+{ "cliente": "Falha Quarto", "checkin": "2026-01-10", "checkout": "2026-01-15", "tipo_quarto": "duplo_cheio" }
+
+
+### TESTE 3: POST - Sucesso 
+POST http://localhost:4564/api/reservas
+Content-Type: application/json
+
+{ "cliente": "Sucesso", "checkin": "2026-02-01", "checkout": "2026-02-03", "tipo_quarto": "duplo" }
+
+
+### TESTE 4: PUT - Fora do Prazo 
+PUT http://localhost:4564/api/reservas/302
+Content-Type: application/json
+
+{ "nova_data": "2026-03-01" }
+
+
+### TESTE 5: PUT - Sucesso 
+PUT http://localhost:4564/api/reservas/301
+Content-Type: application/json
+
+{ "nova_data": "2026-03-01" }
+
+
+### TESTE 6: DELETE - Após Check-in 
+DELETE http://localhost:4564/api/reservas/303
+
+
+### TESTE 7: DELETE - Sucesso 
+DELETE http://localhost:4564/api/reservas/304
+
+
+### TESTE 8: GET Lista Genérica 
+GET http://localhost:4564/api/reservas

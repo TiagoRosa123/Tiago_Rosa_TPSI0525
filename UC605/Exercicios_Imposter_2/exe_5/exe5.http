@@ -1,0 +1,164 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4566,
+  "protocol": "http",
+  "name": "API Gestão de Funcionários",
+  "stubs": [
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/funcionarios" } },
+        { 
+          "matches": { "body": "\"salario\"\\s*:\\s*500" } 
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "O salário não pode ser inferior ao mínimo (760 €)." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "PUT", "path": "/api/funcionarios/101/salario" } },
+        { 
+          "matches": { "body": "\"salario\"\\s*:\\s*500" } 
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "O salário não pode ser inferior ao mínimo (760 €)." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "PUT", "path": "/api/funcionarios/101/salario" } },
+        { "contains": { "body": "\"salario\":500" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "O salário não pode ser inferior ao mínimo (760 €)." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/funcionarios/101" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Não é possível remover o funcionário 101 (tem tarefas pendentes)." }
+          }
+        }
+      ]
+    },
+
+
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/funcionarios/101/salario" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Salário do funcionário 101 atualizado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/funcionarios" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": { "Content-Type": "application/json", "Location": "/api/funcionarios/103" },
+            "body": { "id": 103, "status": "created", "message": "Funcionário adicionado com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/funcionarios/102" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "removido", "message": "Funcionário 102 removido." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/funcionarios" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 101, "nome": "Ana" }, { "id": 102, "nome": "Bruno" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Salário Baixo 
+POST http://localhost:4566/api/funcionarios
+Content-Type: application/json
+
+{ "nome": "Carlos", "cargo": "Júnior", "salario": 500 }
+
+
+### TESTE 2: POST - Sucesso 
+POST http://localhost:4566/api/funcionarios
+Content-Type: application/json
+
+{ "nome": "Diana", "cargo": "Sénior", "salario": 1200 }
+
+
+### TESTE 3: PUT - Salário Baixo 
+PUT http://localhost:4566/api/funcionarios/101/salario
+Content-Type: application/json
+
+{ "salario": 500 }
+
+
+### TESTE 4: PUT - Sucesso 
+PUT http://localhost:4566/api/funcionarios/101/salario
+Content-Type: application/json
+
+{ "salario": 1500 }
+
+
+### TESTE 5: DELETE - Com Tarefas Pendentes 
+DELETE http://localhost:4566/api/funcionarios/101
+
+
+### TESTE 6: DELETE - Sem Tarefas 
+DELETE http://localhost:4566/api/funcionarios/102
+
+
+### TESTE 7: GET Lista 
+GET http://localhost:4566/api/funcionarios

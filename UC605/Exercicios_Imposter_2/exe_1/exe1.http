@@ -1,0 +1,152 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4562,
+  "protocol": "http",
+  "name": "API Gestão de Alunos",
+  "stubs": [
+
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/alunos" } },
+        { 
+          "matches": { "body": "\"idade\":\\s*[1-9]" } 
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 400,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "validation_error", "message": "Idade mínima (10) não atingida." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/alunos" } },
+        { "contains": { "body": "\"curso\":\"Inexistente\"" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "not_found", "message": "Curso não encontrado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/alunos/101" } }, 
+        { "not": { "equals": { "headers": { "X-Admin": "true" } } } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 403,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "forbidden", "message": "Permissão de administração necessária para DELETE." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/alunos/101" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "id": 101, "nome": "João Silva", "idade": 21, "curso": "Engenharia" }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/alunos/101" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "ok", "message": "Aluno 101 atualizado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/alunos" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": { "Content-Type": "application/json", "Location": "/api/alunos/999" },
+            "body": { "id": 999, "status": "created", "message": "Aluno adicionado com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/alunos" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 101, "nome": "João" }, { "id": 102, "nome": "Ana" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Idade Mínima
+POST http://localhost:4562/api/alunos
+Content-Type: application/json
+
+{ "nome": "Pedro", "idade": 9, "curso": "Matemática" }
+
+
+### TESTE 2: POST - Curso Inexistente
+POST http://localhost:4562/api/alunos
+Content-Type: application/json
+
+{ "nome": "Maria", "idade": 18, "curso": "Inexistente" }
+
+
+### TESTE 3: POST - Sucesso
+POST http://localhost:4562/api/alunos
+Content-Type: application/json
+
+{ "nome": "Novo Aluno", "idade": 15, "curso": "Programação" }
+
+
+### TESTE 4: GET por ID - Sucesso
+GET http://localhost:4562/api/alunos/101
+
+
+### TESTE 5: DELETE - Falha por Permissão
+DELETE http://localhost:4562/api/alunos/101
+
+
+### TESTE 6: DELETE - Sucesso por Permissão
+DELETE http://localhost:4562/api/alunos/101
+X-Admin: true
+
+
+### TESTE 7: PUT - Sucesso 
+PUT http://localhost:4562/api/alunos/101
+Content-Type: application/json
+
+{ "idade": 22 }
+
+
+### TESTE 8: GET Lista
+GET http://localhost:4562/api/alunos

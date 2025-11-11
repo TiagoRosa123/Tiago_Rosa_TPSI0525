@@ -1,0 +1,156 @@
+### 1.
+POST http://localhost:2525/imposters
+Content-Type: application/json
+
+{
+  "port": 4565,
+  "protocol": "http",
+  "name": "API Biblioteca Digital",
+  "stubs": [
+
+    {
+      "predicates": [
+        { "equals": { "method": "POST", "path": "/api/emprestimos" } },
+        { "matches": { "body": "\"livro_id\"\\s*:\\s*401" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Livro com ID 401 já se encontra emprestado." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "PUT", "path": "/api/emprestimos/500/devolucao" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 404,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "not_found", "message": "Empréstimo com ID 500 não encontrado ou já devolvido." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        { "equals": { "method": "DELETE", "path": "/api/livros/401" } }
+      ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 409,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "error": "conflict", "message": "Não pode remover o livro 401. Encontra-se emprestado." }
+          }
+        }
+      ]
+    },
+
+    {
+      "predicates": [ { "equals": { "method": "POST", "path": "/api/emprestimos" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 201,
+            "headers": { "Content-Type": "application/json", "Location": "/api/emprestimos/501" },
+            "body": { "id": 501, "status": "emprestado", "message": "Empréstimo registado com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "PUT", "path": "/api/emprestimos/502/devolucao" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "devolvido", "message": "Devolução registada com sucesso." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "DELETE", "path": "/api/livros/403" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "status": "removido", "message": "Livro 403 removido do catálogo." }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/livros/401" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": { "id": 401, "titulo": "Mountebank Mocks", "autor": "B. Byars", "emprestado": true }
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [ { "equals": { "method": "GET", "path": "/api/livros" } } ],
+      "responses": [
+        {
+          "is": {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": [ { "id": 402, "titulo": "RESTful API Design" }, { "id": 403, "titulo": "Mocks Simples" } ]
+          }
+        }
+      ]
+    }
+  ]
+}
+
+
+### TESTE 1: POST - Livro Emprestado 
+POST http://localhost:4565/api/emprestimos
+Content-Type: application/json
+
+{ "cliente": "Duplicado", "livro_id": 401, "data_emprestimo": "2025-10-20" }
+
+
+### TESTE 2: POST - Empréstimo Sucesso 
+POST http://localhost:4565/api/emprestimos
+Content-Type: application/json
+
+{ "cliente": "Novo", "livro_id": 402, "data_emprestimo": "2025-10-31" }
+
+
+### TESTE 3: PUT - Devolução Inexistente 
+PUT http://localhost:4565/api/emprestimos/500/devolucao
+Content-Type: application/json
+
+{ "data_devolucao": "2025-11-01" }
+
+
+### TESTE 4: PUT - Devolução Sucesso 
+PUT http://localhost:4565/api/emprestimos/502/devolucao
+Content-Type: application/json
+
+{ "data_devolucao": "2025-11-01" }
+
+
+### TESTE 5: DELETE - Livro Emprestado 
+DELETE http://localhost:4565/api/livros/401
+
+
+### TESTE 6: DELETE - Livro Disponível 
+DELETE http://localhost:4565/api/livros/403
+
+
+### TESTE 7: GET Lista 
+GET http://localhost:4565/api/livros
